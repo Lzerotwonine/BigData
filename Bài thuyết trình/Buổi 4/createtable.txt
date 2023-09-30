@@ -1,0 +1,75 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\hbase-1.4.9\bin> start-hbase.cmd
+PS C:\hbase-1.4.9\bin> hbase shell
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/hbase-1.4.9/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/hadoop-3.3.0/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+HBase Shell
+Use "help" to get list of supported commands.
+Use "exit" to quit this interactive shell.
+Version 1.4.9, rd625b212e46d01cb17db9ac2e9e927fdb201afa1, Wed Dec  5 11:54:10 PST 2018
+
+hbase(main):002:0> create 'students', 'info', 'score'
+0 row(s) in 6.3690 seconds
+
+=> Hbase::Table - students
+hbase(main):003:0> put 'students', 's001', 'info:name', 'Alice'
+0 row(s) in 0.0710 seconds
+
+hbase(main):004:0> put 'students', 's001', 'info:age', '18'
+0 row(s) in 0.0040 seconds
+
+hbase(main):005:0> put 'students', 's001', 'score:math', '90'
+0 row(s) in 0.0040 seconds
+
+hbase(main):006:0> put 'students', 's001', 'score:english', '85'
+0 row(s) in 0.0030 seconds
+
+hbase(main):007:0> scan 'students'
+ROW                             COLUMN+CELL
+ s001                           column=info:age, timestamp=1696044698912, value=18
+ s001                           column=info:name, timestamp=1696044686894, value=Alice
+ s001                           column=score:english, timestamp=1696044720317, value=85
+ s001                           column=score:math, timestamp=1696044711354, value=90
+1 row(s) in 0.0130 seconds
+
+hbase(main):008:0> scan 'students', {COLUMN => ['info:name', 'info:age']}
+ROW                             COLUMN+CELL
+ s001                           column=info:age, timestamp=1696044698912, value=18
+ s001                           column=info:name, timestamp=1696044686894, value=Alice
+1 row(s) in 0.0070 seconds
+
+hbase(main):009:0> get 'students', 's001'
+COLUMN                          CELL
+ info:age                       timestamp=1696044698912, value=18
+ info:name                      timestamp=1696044686894, value=Alice
+ score:english                  timestamp=1696044720317, value=85
+ score:math                     timestamp=1696044711354, value=90
+1 row(s) in 0.0150 seconds
+
+hbase(main):010:0> get 'students', 's001', {COLUMN => ['info:name']}
+COLUMN                          CELL
+ info:name                      timestamp=1696044686894, value=Alice
+1 row(s) in 0.0030 seconds
+
+hbase(main):011:0> delete 'students', 's001', 'score:math'
+0 row(s) in 0.0170 seconds
+
+hbase(main):012:0> scan 'students'
+ROW                             COLUMN+CELL
+ s001                           column=info:age, timestamp=1696044698912, value=18
+ s001                           column=info:name, timestamp=1696044686894, value=Alice
+ s001                           column=score:english, timestamp=1696044720317, value=85
+1 row(s) in 0.0070 seconds
+
+hbase(main):013:0> disable 'students'
+0 row(s) in 2.2670 seconds
+
+hbase(main):014:0> drop 'students'
+0 row(s) in 1.2650 seconds
