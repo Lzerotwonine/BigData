@@ -1,0 +1,32 @@
+khởi động Kafka
+- Chạy zookeeper (mở cmd mục Kafka): .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+- Chạy kafka (mở cmd mục Kafka mới): .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+Chạy lệnh (mở cmd mục bin/windows)
+- Tạo topic: kafka-topics.bat --bootstrap-server localhost:9092 --create --topic TestTopic --replication-factor 1 --partitions 1
+
+- Liệt kê topic: kafka-topics.bat --bootstrap-server localhost:9092 --list --exclude-internal
+
+- Hiện thông số: kafka-topics.bat --bootstrap-server localhost:9092 --describe --exclude-internal
+
+- Nhập nội dung topic: kafka-console-producer.bat --bootstrap-server localhost:9092 --topic TestTopic
+Dừng nhập: Ctrl + C hoặc F6.
+
+- Hiện nội dung: kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic --from-beginning
+
+- Xoá topic: kafka-topics.bat --bootstrap-server localhost:9092 --delete --topic TestTopic
+
+Tạo Producer và Comsumer
+- Producer: kafka-console-producer.bat --bootstrap-server localhost:9092 --topic TestTopic
+- Comsumer: kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic
+
+
+Group consumer:
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic Topic --group Group
+
+
+Tài liệu tham khảo:
+https://www.youtube.com/watch?v=Nd8uahha_34
+https://www.geeksforgeeks.org/how-to-install-and-run-apache-kafka-on-windows/
+https://stackjava.com/apache-kafka/cai-dat-chay-apache-kafka-apache-zookeeper-tren-windows.html
+https://www.conduktor.io/kafka/kafka-cli-tutorial/
